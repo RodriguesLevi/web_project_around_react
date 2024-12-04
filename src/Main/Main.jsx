@@ -1,32 +1,90 @@
-import ImageLike from "../images/image__like.png";
-import Trash from "../images/Trash.png";
+import buttonAdd from "../images/profile__add.png";
+import profileButton from "../images/profile__botton.png";
+import profileAdd from "../images/image_header.jpg";
+import NewCard from "./components/Popup/components/NewCard/NewCard";
+import { useState } from "react";
+import Popup from "./components/Popup/Popup.jsx";
+// import Card from "../components/Main/components/Card/Card.jsx";
+
 function Main() {
+  const [popup, setPopup] = useState(null);
+  const newCardPopup = { title: "New card", children: <NewCard /> };
+  const editAvatarPopup = { title: "New card", children: <NewCard /> };
+  const editProfilePopup = { title: "New card", children: <NewCard /> };
+
+  function handleOpenPopup(popup) {
+    setPopup(popup);
+  }
+  function handleClosePopup() {
+    setPopup(null);
+  }
+
+  const cards = [
+    {
+      isLiked: false,
+      _id: "5d1f0611d321eb4bdcd707dd",
+      name: "Yosemite Valley",
+      link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_yosemite.jpg",
+      owner: "5d1f0611d321eb4bdcd707dd",
+      createdAt: "2019-07-05T08:10:57.741Z",
+    },
+    {
+      isLiked: false,
+      _id: "5d1f064ed321eb4bdcd707de",
+      name: "Lake Louise",
+      link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_lake-louise.jpg",
+      owner: "5d1f0611d321eb4bdcd707dd",
+      createdAt: "2019-07-05T08:11:58.324Z",
+    },
+  ];
+
+  console.log(cards);
+
   return (
-    <main className="cards">
-      <template id="card-template">
-        <div className="cards__container">
-          <button className="cards__button-remove">
-            <img src="" alt="" className="cards__image" />
-          </button>
+    <main className="profile">
+      {/* <Card /> */}
+      <section className="profile">
+        <div className="profile-edit-avt">
           <img
-            id="remove-image"
-            src={Trash}
-            alt="delete"
-            className="cards__delete"
+            src={profileAdd}
+            alt=" imagem do perfil"
+            className="profile__image"
           />
-          <div className="cards__container-title">
-            <h3 className="cards__container-name"></h3>
-            <button className="cards__button" type="button">
+          <button
+            alt="Editar avatar"
+            className="profile__edit-photo"
+            onClick={() => handleOpenPopup(editAvatarPopup)}
+          ></button>
+        </div>
+        <div className="profile__card">
+          <h2 className="profile__name">Jacques Cousteau</h2>
+          <div>
+            <button className="profile__button">
               <img
-                className="cards__button-like"
-                src={ImageLike}
-                alt="icone de like"
+                src={profileButton}
+                alt="botao"
+                id="#login"
+                onClick={() => handleOpenPopup(editProfilePopup)}
               />
-              <span className="cards__like-counter">0</span>
             </button>
           </div>
+          <p className="profile__description">Explorador</p>
         </div>
-      </template>
+
+        <button className="profile__add">
+          <img
+            src={buttonAdd}
+            alt="adicionar"
+            className="profile__add-bt"
+            onClick={() => handleOpenPopup(newCardPopup)}
+          />
+        </button>
+      </section>
+      {popup && (
+        <Popup onClose={handleClosePopup} title={popup.title}>
+          {popup.children}
+        </Popup>
+      )}
     </main>
   );
 }
