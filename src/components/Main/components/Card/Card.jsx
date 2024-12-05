@@ -3,7 +3,7 @@ import Trash from "../../../../images/Trash.png";
 import ImagePopup from "./ImagePopup/ImagePopup";
 export default function Card(props) {
   const { name, link, handleOpenPopup } = props.card;
-  // isLiked,
+  // isLiked,ff
 
   const imagePopup = {
     children: <ImagePopup />,
