@@ -1,11 +1,22 @@
 import ImageLike from "../../../../images/image__like.png";
 import Trash from "../../../../images/Trash.png";
+import ImagePopup from "./ImagePopup/ImagePopup";
 export default function Card(props) {
-  const { name, link, isLiked } = props.card;
+  const { name, link, isLiked, handleOpenPopup } = props.card;
+
+  const imagePopup = {
+    children: <ImagePopup />,
+  };
+
   return (
     <div className="cards__container">
       <button className="cards__button-remove">
-        <img src={link} alt="" className="cards__image" />
+        <img
+          src={link}
+          alt=""
+          className="cards__image"
+          onClick={() => handleOpenPopup(imagePopup)}
+        />
       </button>
       <img
         id="remove-image"

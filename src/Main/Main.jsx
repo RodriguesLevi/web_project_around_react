@@ -4,13 +4,21 @@ import profileAdd from "../images/image_header.jpg";
 import NewCard from "./components/Popup/components/NewCard/NewCard";
 import { useState } from "react";
 import Popup from "./components/Popup/Popup.jsx";
-// import Card from "../components/Main/components/Card/Card.jsx";
+import Card from "../components/Main/components/Card/Card.jsx";
+import EditProfile from "./components/Popup/components/EditAvatar/EditAvatar.jsx";
+import EditAvatar from "./components/Popup/components/EditProfile/EditProfile.jsx";
 
 function Main() {
   const [popup, setPopup] = useState(null);
-  const newCardPopup = { title: "New card", children: <NewCard /> };
-  const editAvatarPopup = { title: "New card", children: <NewCard /> };
-  const editProfilePopup = { title: "New card", children: <NewCard /> };
+  const newCardPopup = { title: "Novo cartão", children: <NewCard /> };
+  const editAvatarPopup = {
+    title: "Alterar a foto de perfil",
+    children: <EditAvatar />,
+  };
+  const editProfilePopup = {
+    title: "Editar Perfil",
+    children: <EditProfile />,
+  };
 
   function handleOpenPopup(popup) {
     setPopup(popup);
@@ -41,8 +49,7 @@ function Main() {
   console.log(cards);
 
   return (
-    <main className="profile">
-      {/* <Card /> */}
+    <main className="content">
       <section className="profile">
         <div className="profile-edit-avt">
           <img
@@ -80,6 +87,12 @@ function Main() {
           />
         </button>
       </section>
+      <section className="cards">
+        {cards.map((card) => (
+          <Card key={card._id} card={card} handleOpenPopup={handleOpenPopup} />
+        ))}
+      </section>
+
       {popup && (
         <Popup onClose={handleClosePopup} title={popup.title}>
           {popup.children}
