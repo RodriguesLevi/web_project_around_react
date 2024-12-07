@@ -5,8 +5,8 @@ import NewCard from "./components/Popup/components/NewCard/NewCard";
 import { useState } from "react";
 import Popup from "./components/Popup/Popup.jsx";
 import Card from "../components/Main/components/Card/Card.jsx";
-import EditProfile from "./components/Popup/components/EditAvatar/EditAvatar.jsx";
-import EditAvatar from "./components/Popup/components/EditProfile/EditProfile.jsx";
+import EditAvatar from "./components/Popup/components/EditAvatar/EditAvatar.jsx";
+import EditProfile from "./components/Popup/components/EditProfile/EditProfile.jsx";
 
 function Main() {
   const [popup, setPopup] = useState(null);
@@ -45,8 +45,6 @@ function Main() {
       createdAt: "2019-07-05T08:11:58.324Z",
     },
   ];
-
-  console.log(cards);
 
   return (
     <main className="content">

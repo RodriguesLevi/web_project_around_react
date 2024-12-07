@@ -1,6 +1,6 @@
 export default function EditProfile() {
   return (
-    <form id="user-form" className="form" noValidate>
+    <form id="user-form" className="form">
       <fieldset className="form__fieldset">
         <div className="form__display">
           <input

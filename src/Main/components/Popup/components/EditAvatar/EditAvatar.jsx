@@ -1,11 +1,6 @@
 export default function EditAvatar() {
   return (
-    <form
-      id="avatar-form"
-      className="form form_edit-avatar"
-      name="edit-avatar"
-      noValidate
-    >
+    <form id="avatar-form" className="form form_edit-avatar" name="edit-avatar">
       <fieldset className="form__fieldset">
         <input
           type="url"

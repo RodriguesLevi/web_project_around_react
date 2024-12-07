@@ -14,7 +14,7 @@ export default function Card(props) {
       <button className="cards__button-remove">
         <img
           src={link}
-          alt=""
+          alt="image"
           className="cards__image"
           onClick={() => handleOpenPopup(imagePopup)}
         />

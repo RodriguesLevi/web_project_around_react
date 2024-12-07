@@ -1,4 +1,4 @@
-import logo_around from "../images/logo_around.png";
+import logo_around from "../../images/logo_around.png";
 function Header() {
   return (
     <header className="header">

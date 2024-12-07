@@ -1,6 +1,6 @@
 export default function NewCard() {
   return (
-    <form id="card-form" className="form form-add" noValidate>
+    <form id="card-form" className="form form-add">
       <fieldset className="form__fieldset form__fieldset-add">
         <div className="form__display">
           <input
