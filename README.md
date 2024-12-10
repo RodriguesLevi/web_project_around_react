@@ -1,8 +1,11 @@
-# React + Vite
+# Tripleten - Projeto Web em torno do React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+O Tripleten Project Arround é um site onde as pessoas podem ter seus perfis.
 
-Currently, two official plugins are available:
+## Descrição:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+O Tripleten Project Arround é um site onde as pessoas podem ter seu perfil com seu nome, ocupação, foto e adicionar fotos de lugares.
+
+## As tecnologias utilizadas
+
+foram HTML, CSS, Javascript, React e Vite aplicando a metodologia BEM nelas.

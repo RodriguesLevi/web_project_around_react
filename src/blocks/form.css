@@ -28,7 +28,6 @@
   border: none;
   display: flex;
   flex-direction: column;
-  align-items: center;
   margin-top: 75px;
 }
 .form__display {
@@ -96,6 +95,9 @@
 }
 
 @media screen and (max-width: 740px) {
+  .form__fieldset {
+    width: 200px;
+  }
   .form {
     max-width: 282px;
     width: 100%;
@@ -111,10 +113,11 @@
   }
 
   .form__input {
-    width: 250px;
+    width: 180px;
   }
   .form__button {
-    width: 250px;
+    width: 190px;
+    margin-top: 10px;
   }
   .form__display {
     width: 250px;
