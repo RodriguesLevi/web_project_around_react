@@ -1,6 +1,6 @@
 import ImageLike from "../../../../images/image__like.png";
 import Trash from "../../../../images/Trash.png";
-import ImagePopup from "./ImagePopup/ImagePopup";
+import ImagePopup from "../Popup/components/ImagePopup/ImagePopup";
 export default function Card(props) {
   const { name, link, isLiked } = props.card;
   const { handleOpenPopup } = props;

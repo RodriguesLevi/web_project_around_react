@@ -1,10 +1,10 @@
-import buttonAdd from "../images/profile__add.png";
-import profileButton from "../images/profile__botton.png";
-import profileAdd from "../images/image_header.jpg";
-import NewCard from "./components/Popup/components/NewCard/NewCard";
+import buttonAdd from "../../images/profile__add.png";
+import profileButton from "../../images/profile__botton.png";
+import profileAdd from "../../images/image_header.jpg";
+import NewCard from "./components/Popup/components/NewCard.jsx";
 import { useState } from "react";
 import Popup from "./components/Popup/Popup.jsx";
-import Card from "../components/Main/components/Card/Card.jsx";
+import Card from "./components/Card/Card.jsx";
 import EditAvatar from "./components/Popup/components/EditAvatar/EditAvatar.jsx";
 import EditProfile from "./components/Popup/components/EditProfile/EditProfile.jsx";
 

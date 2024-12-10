@@ -1,4 +1,4 @@
-import close from "../../../images/close__image.png";
+import close from "../../../../images/close__image.png";
 export default function Popup(props) {
   const { title, children, onClose } = props;
   return (
