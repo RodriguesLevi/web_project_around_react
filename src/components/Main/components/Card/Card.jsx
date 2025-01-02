@@ -1,11 +1,14 @@
-import ImageLike from "../../../../images/image__like.png";
 import Trash from "../../../../images/Trash.png";
 import ImagePopup from "../Popup/components/ImagePopup/ImagePopup";
 export default function Card(props) {
-  const { name, link } = props.card;
-  const { handleOpenPopup } = props;
+  const { name, link, isLiked } = props.card;
+  const { handleOpenPopup, handleCardLike } = props;
 
   const imagePopup = { children: <ImagePopup card={props.card} /> };
+
+  const cardLikeButtonClassName = `cards__button-like ${
+    isLiked ? "cards__button-like_is-active" : ""
+  }`;
 
   return (
     <div className="cards__container">
@@ -25,14 +28,15 @@ export default function Card(props) {
       />
       <div className="cards__container-title">
         <h3 className="cards__container-name">{name}</h3>
-        <button className="cards__button" type="button">
-          <img
-            className="cards__button-like"
-            src={ImageLike}
-            alt="icone de like"
+        <div className="cards__container-button">
+          <button
+            onClick={() => handleCardLike(props?.card)}
+            className={cardLikeButtonClassName}
           />
-          <span className="cards__like-counter">0</span>
-        </button>
+          <span className="cards__like-counter">
+            {props?.card?.likes?.length}
+          </span>
+        </div>
       </div>
     </div>
   );

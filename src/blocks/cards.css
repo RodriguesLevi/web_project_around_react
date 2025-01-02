@@ -41,6 +41,26 @@
   white-space: nowrap;
   overflow: hidden;
 }
+.cards__container-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.cards__button-like {
+  width: 21px;
+  height: 19px;
+  background-image: url(../images/image__like.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+}
+.cards__button-like_is-active {
+  background-image: url(../images/image__like_color.png);
+}
 .cards__delete {
   width: 18px;
   height: 19.3px;
@@ -49,25 +69,12 @@
   right: 15px;
   cursor: pointer;
 }
-.cards__like-counter {
-  margin-left: 7px;
-}
-
 .cards__delete:hover {
   opacity: 60%;
 }
 .cards__delete-hidden {
   display: none;
 }
-.cards__button {
-  width: 21px;
-  height: 19px;
-  background-size: contain;
-  border: none;
-  cursor: pointer;
-  background-color: transparent;
-}
-
 .cards__button-remove {
   border: none;
   background-color: transparent;

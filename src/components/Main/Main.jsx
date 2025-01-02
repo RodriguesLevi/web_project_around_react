@@ -2,11 +2,13 @@ import buttonAdd from "../../images/profile__add.png";
 import profileButton from "../../images/profile__botton.png";
 import profileAdd from "../../images/image_header.jpg";
 import NewCard from "./components/Popup/components/NewCard.jsx";
-import { useState } from "react";
+import { useState, useEffect, useContext } from "react";
 import Popup from "./components/Popup/Popup.jsx";
 import Card from "./components/Card/Card.jsx";
 import EditAvatar from "./components/Popup/components/EditAvatar/EditAvatar.jsx";
 import EditProfile from "./components/Popup/components/EditProfile/EditProfile.jsx";
+import api from "../../utils/api.js";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext.js";
 
 function Main() {
   const [popup, setPopup] = useState(null);
@@ -27,31 +29,41 @@ function Main() {
     setPopup(null);
   }
 
-  const cards = [
-    {
-      isLiked: false,
-      _id: "5d1f0611d321eb4bdcd707dd",
-      name: "Yosemite Valley",
-      link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_yosemite.jpg",
-      owner: "5d1f0611d321eb4bdcd707dd",
-      createdAt: "2019-07-05T08:10:57.741Z",
-    },
-    {
-      isLiked: false,
-      _id: "5d1f064ed321eb4bdcd707de",
-      name: "Lake Louise",
-      link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_lake-louise.jpg",
-      owner: "5d1f0611d321eb4bdcd707dd",
-      createdAt: "2019-07-05T08:11:58.324Z",
-    },
-  ];
+  const [cards, setCards] = useState([]);
+  const currentUser = useContext(CurrentUserContext);
+
+  useEffect(() => {
+    api
+      .getCards()
+      .then((initialCards) => {
+        setCards(initialCards);
+      })
+      .catch((err) => console.error(err));
+  }, []);
+
+  async function handleCardLike(card) {
+    // Verificar mais uma vez se esse cartão já foi curtido
+    const isLiked = card.isLiked;
+
+    // Enviar uma solicitação para a API e obter os dados do cartão atualizados
+    await api
+      .changeLikeCardStatus(card._id, !isLiked)
+      .then((newCard) => {
+        setCards((state) =>
+          state.map((currentCard) =>
+            currentCard._id === card._id ? newCard : currentCard
+          )
+        );
+      })
+      .catch((error) => console.error(error));
+  }
 
   return (
     <main className="content">
       <section className="profile">
         <div className="profile-edit-avt">
           <img
-            src={profileAdd}
+            src={currentUser.avatar || profileAdd}
             alt=" imagem do perfil"
             className="profile__image"
           />
@@ -62,7 +74,9 @@ function Main() {
           ></button>
         </div>
         <div className="profile__card">
-          <h2 className="profile__name">Jacques Cousteau</h2>
+          <h2 className="profile__name">
+            {currentUser.name || "Jacques Cousteau"}
+          </h2>
           <div>
             <button className="profile__button">
               <img
@@ -73,7 +87,9 @@ function Main() {
               />
             </button>
           </div>
-          <p className="profile__description">Explorador</p>
+          <p className="profile__description">
+            {currentUser.about || "Explorador"}
+          </p>
         </div>
 
         <button className="profile__add">
@@ -86,8 +102,13 @@ function Main() {
         </button>
       </section>
       <section className="cards">
-        {cards.map((card) => (
-          <Card key={card._id} card={card} handleOpenPopup={handleOpenPopup} />
+        {cards?.map((card) => (
+          <Card
+            key={card?._id}
+            card={card}
+            handleOpenPopup={handleOpenPopup}
+            handleCardLike={handleCardLike}
+          />
         ))}
       </section>
 
