@@ -9,6 +9,7 @@ export default function Card(props) {
   const cardLikeButtonClassName = `cards__button-like ${
     isLiked ? "cards__button-like_is-active" : ""
   }`;
+  console.log(props.card);
 
   return (
     <div className="cards__container">

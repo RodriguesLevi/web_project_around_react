@@ -43,7 +43,7 @@ class Api {
   }
 
   likeCard(cardId) {
-    return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
+    return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
       method: "PUT",
       headers: this._headers,
     }).then((res) => {
@@ -55,7 +55,7 @@ class Api {
   }
 
   unlikeCard(cardId) {
-    return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
+    return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
       method: "DELETE",
       headers: this._headers,
     }).then((res) => {
@@ -68,10 +68,9 @@ class Api {
 
   changeLikeCardStatus(cardId, isLiked) {
     if (isLiked) {
-      return this.unlikeCard(cardId);
+      return this.likeCard(cardId);
     }
-
-    return this.likeCard(cardId);
+    return this.unlikeCard(cardId);
   }
 
   editProfileAvatar(avatar) {
@@ -93,7 +92,7 @@ class Api {
 const api = new Api({
   baseUrl: "https://around-api.pt-br.tripleten-services.com/v1",
   headers: {
-    authorization: "18003886-b213-4054-97f5-79797a7a7bca",
+    authorization: "4a46a878-84db-4146-9d23-85ff4b307823",
     "Content-Type": "application/json",
   },
 });
