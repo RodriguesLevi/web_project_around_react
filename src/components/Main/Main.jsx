@@ -12,6 +12,18 @@ import { CurrentUserContext } from "../../contexts/CurrentUserContext.js";
 
 function Main() {
   const [popup, setPopup] = useState(null);
+  const [cards, setCards] = useState([]);
+  const { currentUser } = useContext(CurrentUserContext);
+
+  useEffect(() => {
+    api
+      .getCards()
+      .then((initialCards) => {
+        setCards(initialCards);
+      })
+      .catch((err) => console.error(err));
+  }, []);
+
   const newCardPopup = { title: "Novo cartão", children: <NewCard /> };
   const editAvatarPopup = {
     title: "Alterar a foto de perfil",
@@ -22,24 +34,25 @@ function Main() {
     children: <EditProfile />,
   };
 
+  //Em seguida, repita os passos anteriores,
+  //  mas dessa vez, adicione a função handleCardDelete() em Main,
+  // bem como o prop onCardDelete e o manipulador handleDeleteClick() em Card.
+
+  //Após a solicitação da API, atualize o estado cards usando o método filter().
+  // Crie uma cópia do vetor e exclua o cartão deletado dele.
+
   function handleOpenPopup(popup) {
     setPopup(popup);
   }
   function handleClosePopup() {
     setPopup(null);
   }
-
-  const [cards, setCards] = useState([]);
-  const currentUser = useContext(CurrentUserContext);
-
-  useEffect(() => {
-    api
-      .getCards()
-      .then((initialCards) => {
-        setCards(initialCards);
-      })
-      .catch((err) => console.error(err));
-  }, []);
+  function handleCardDelete(card) {
+    api.deleteCard(card._id);
+    setCards((state) =>
+      state.filter((currentCard) => currentCard._id !== card._id)
+    );
+  }
 
   async function handleCardLike(card) {
     // Verificar mais uma vez se esse cartão já foi curtido
@@ -108,6 +121,7 @@ function Main() {
             card={card}
             handleOpenPopup={handleOpenPopup}
             handleCardLike={handleCardLike}
+            handleCardDelete={handleCardDelete}
           />
         ))}
       </section>

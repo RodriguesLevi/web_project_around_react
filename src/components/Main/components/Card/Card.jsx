@@ -2,14 +2,13 @@ import Trash from "../../../../images/Trash.png";
 import ImagePopup from "../Popup/components/ImagePopup/ImagePopup";
 export default function Card(props) {
   const { name, link, isLiked } = props.card;
-  const { handleOpenPopup, handleCardLike } = props;
+  const { handleOpenPopup, handleCardLike, handleCardDelete } = props;
 
   const imagePopup = { children: <ImagePopup card={props.card} /> };
 
   const cardLikeButtonClassName = `cards__button-like ${
     isLiked ? "cards__button-like_is-active" : ""
   }`;
-  console.log(props.card);
 
   return (
     <div className="cards__container">
@@ -26,6 +25,7 @@ export default function Card(props) {
         src={Trash}
         alt="delete"
         className="cards__delete"
+        onClick={() => handleCardDelete(props.card)}
       />
       <div className="cards__container-title">
         <h3 className="cards__container-name">{name}</h3>

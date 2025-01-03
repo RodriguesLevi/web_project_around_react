@@ -17,8 +17,16 @@ function App() {
       .catch((err) => console.error(err));
   }, []);
 
+  const handleUpdateUser = (data) => {
+    (async () => {
+      await api.editProfile(data).then((newData) => {
+        setCurrentUser(newData);
+      });
+    })();
+  };
+
   return (
-    <CurrentUserContext.Provider value={currentUser}>
+    <CurrentUserContext.Provider value={{ currentUser, handleUpdateUser }}>
       <div className="page">
         <Header />
         <Main />
