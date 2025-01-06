@@ -4,8 +4,8 @@ import { CurrentUserContext } from "../../../../../../contexts/CurrentUserContex
 export default function EditProfile() {
   const { currentUser, handleUpdateUser } = useContext(CurrentUserContext); // Obtém o objeto de usuário atual
 
-  const [name, setName] = useState(currentUser.name); // Adicione variável de estado para nome
-  const [description, setDescription] = useState(currentUser.about); // Adicione variável de estado para descrição
+  const [name, setName] = useState(currentUser?.name); // Adicione variável de estado para nome
+  const [description, setDescription] = useState(currentUser?.about); // Adicione variável de estado para descrição
 
   const handleNameChange = (event) => {
     setName(event.target.value); // Atualiza o nome (name) quando a entrada for alterada

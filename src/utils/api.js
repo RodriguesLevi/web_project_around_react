@@ -78,6 +78,11 @@ class Api {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify(avatar),
+    }).then((res) => {
+      if (!res.ok) {
+        throw new Error(`HTTP error! status: ${res.status}`);
+      }
+      return res.json();
     });
   }
 
@@ -86,6 +91,11 @@ class Api {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({ name, about }),
+    }).then((res) => {
+      if (!res.ok) {
+        throw new Error(`HTTP error! status: ${res.status}`);
+      }
+      return res.json();
     });
   }
 }

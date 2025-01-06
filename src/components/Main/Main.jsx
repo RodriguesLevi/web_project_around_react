@@ -2,27 +2,22 @@ import buttonAdd from "../../images/profile__add.png";
 import profileButton from "../../images/profile__botton.png";
 import profileAdd from "../../images/image_header.jpg";
 import NewCard from "./components/Popup/components/NewCard.jsx";
-import { useState, useEffect, useContext } from "react";
+import { useContext } from "react";
 import Popup from "./components/Popup/Popup.jsx";
 import Card from "./components/Card/Card.jsx";
 import EditAvatar from "./components/Popup/components/EditAvatar/EditAvatar.jsx";
 import EditProfile from "./components/Popup/components/EditProfile/EditProfile.jsx";
-import api from "../../utils/api.js";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext.js";
 
-function Main() {
-  const [popup, setPopup] = useState(null);
-  const [cards, setCards] = useState([]);
+function Main({
+  popup,
+  cards,
+  handleCardDelete,
+  handleCardLike,
+  handleClosePopup,
+  handleOpenPopup,
+}) {
   const { currentUser } = useContext(CurrentUserContext);
-
-  useEffect(() => {
-    api
-      .getCards()
-      .then((initialCards) => {
-        setCards(initialCards);
-      })
-      .catch((err) => console.error(err));
-  }, []);
 
   const newCardPopup = { title: "Novo cartão", children: <NewCard /> };
   const editAvatarPopup = {
@@ -33,50 +28,12 @@ function Main() {
     title: "Editar Perfil",
     children: <EditProfile />,
   };
-
-  //Em seguida, repita os passos anteriores,
-  //  mas dessa vez, adicione a função handleCardDelete() em Main,
-  // bem como o prop onCardDelete e o manipulador handleDeleteClick() em Card.
-
-  //Após a solicitação da API, atualize o estado cards usando o método filter().
-  // Crie uma cópia do vetor e exclua o cartão deletado dele.
-
-  function handleOpenPopup(popup) {
-    setPopup(popup);
-  }
-  function handleClosePopup() {
-    setPopup(null);
-  }
-  function handleCardDelete(card) {
-    api.deleteCard(card._id);
-    setCards((state) =>
-      state.filter((currentCard) => currentCard._id !== card._id)
-    );
-  }
-
-  async function handleCardLike(card) {
-    // Verificar mais uma vez se esse cartão já foi curtido
-    const isLiked = card.isLiked;
-
-    // Enviar uma solicitação para a API e obter os dados do cartão atualizados
-    await api
-      .changeLikeCardStatus(card._id, !isLiked)
-      .then((newCard) => {
-        setCards((state) =>
-          state.map((currentCard) =>
-            currentCard._id === card._id ? newCard : currentCard
-          )
-        );
-      })
-      .catch((error) => console.error(error));
-  }
-
   return (
     <main className="content">
       <section className="profile">
         <div className="profile-edit-avt">
           <img
-            src={currentUser.avatar || profileAdd}
+            src={currentUser?.avatar || profileAdd}
             alt=" imagem do perfil"
             className="profile__image"
           />
@@ -88,7 +45,7 @@ function Main() {
         </div>
         <div className="profile__card">
           <h2 className="profile__name">
-            {currentUser.name || "Jacques Cousteau"}
+            {currentUser?.name || "Jacques Cousteau"}
           </h2>
           <div>
             <button className="profile__button">
@@ -101,7 +58,7 @@ function Main() {
             </button>
           </div>
           <p className="profile__description">
-            {currentUser.about || "Explorador"}
+            {currentUser?.about || "Explorador"}
           </p>
         </div>
 
