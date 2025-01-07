@@ -32,6 +32,11 @@ class Api {
       method: "POST",
       headers: this._headers,
       body: JSON.stringify(data),
+    }).then((res) => {
+      if (!res.ok) {
+        throw new Error(`HTTP error! status: ${res.status}`);
+      }
+      return res.json();
     });
   }
 
@@ -39,6 +44,11 @@ class Api {
     return fetch(`${this._baseUrl}/cards/${cardId}`, {
       method: "DELETE",
       headers: this._headers,
+    }).then((res) => {
+      if (!res.ok) {
+        throw new Error(`HTTP error! status: ${res.status}`);
+      }
+      return res.json();
     });
   }
 

@@ -1,6 +1,27 @@
+import { useState, useContext } from "react";
+
+import { CardsContext } from "../../../../../contexts/CardsContext";
+
 export default function NewCard() {
+  const { currentUser, handleAddPlaceSubmit } = useContext(CardsContext);
+
+  const [title, setTitle] = useState(currentUser?.title);
+  const [url, setUrl] = useState(currentUser?.url);
+
+  const handleTile = (event) => {
+    setTitle(event.target.value);
+  };
+  const handleUrl = (event) => {
+    setUrl(event.target.value);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    handleAddPlaceSubmit({ title, url });
+  };
+
   return (
-    <form id="card-form" className="form form-add">
+    <form id="card-form" className="form form-add" onSubmit={handleSubmit}>
       <fieldset className="form__fieldset form__fieldset-add">
         <div className="form__display">
           <input
@@ -12,6 +33,8 @@ export default function NewCard() {
             minLength="2"
             maxLength="30"
             required
+            value={title}
+            onChange={handleTile}
           />
           <p className="error-message"></p>
         </div>
@@ -23,6 +46,8 @@ export default function NewCard() {
             name="url"
             placeholder="Link de imagem"
             required
+            value={title}
+            onChange={handleUrl}
           />
           <p className="form__input-error-message"></p>
         </div>

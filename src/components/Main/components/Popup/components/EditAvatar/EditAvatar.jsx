@@ -3,7 +3,7 @@ import { CurrentUserContext } from "../../../../../../contexts/CurrentUserContex
 
 export default function EditAvatar() {
   const { currentUser, handleUpdateAvatar } = useContext(CurrentUserContext);
-  const [avatar, setAvatar] = useState(currentUser.avatar);
+  const [avatar, setAvatar] = useState(currentUser?.avatar);
 
   const handleAvatarChange = (event) => {
     setAvatar(event.target.value);
