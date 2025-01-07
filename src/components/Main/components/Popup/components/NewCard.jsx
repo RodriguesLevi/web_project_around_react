@@ -3,12 +3,12 @@ import { useState, useContext } from "react";
 import { CardsContext } from "../../../../../contexts/CardsContext";
 
 export default function NewCard() {
-  const { currentUser, handleAddPlaceSubmit } = useContext(CardsContext);
+  const handleAddPlaceSubmit = useContext(CardsContext);
 
-  const [title, setTitle] = useState(currentUser?.title);
-  const [url, setUrl] = useState(currentUser?.url);
+  const [title, setTitle] = useState("");
+  const [url, setUrl] = useState("");
 
-  const handleTile = (event) => {
+  const handleTitle = (event) => {
     setTitle(event.target.value);
   };
   const handleUrl = (event) => {
@@ -17,7 +17,7 @@ export default function NewCard() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    handleAddPlaceSubmit({ title, url });
+    handleAddPlaceSubmit({ name: title, link: url });
   };
 
   return (
@@ -34,7 +34,7 @@ export default function NewCard() {
             maxLength="30"
             required
             value={title}
-            onChange={handleTile}
+            onChange={handleTitle}
           />
           <p className="error-message"></p>
         </div>
@@ -46,13 +46,12 @@ export default function NewCard() {
             name="url"
             placeholder="Link de imagem"
             required
-            value={title}
+            value={url}
             onChange={handleUrl}
           />
           <p className="form__input-error-message"></p>
         </div>
         <button
-          disabled
           id="create-button"
           className="form__button form__button-add"
           type="submit"

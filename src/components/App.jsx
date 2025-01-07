@@ -30,7 +30,7 @@ function App() {
   };
   const handleUpdateAvatar = (data) => {
     (async () => {
-      await api.setAvatar(data).then((newData) => {
+      await api.editProfileAvatar(data).then((newData) => {
         setCurrentUser(newData);
         handleClosePopup();
       });
@@ -39,7 +39,7 @@ function App() {
 
   const handleAddPlaceSubmit = (data) => {
     (async () => {
-      await api.newCard(data).then((newCard) => {
+      await api.createCard(data).then((newCard) => {
         setCards([newCard, ...cards]);
         handleClosePopup();
       });

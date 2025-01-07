@@ -33,7 +33,7 @@ export default function EditAvatar() {
           value={avatar}
           onChange={handleAvatarChange}
         />
-        <button disabled type="submit" className="form__button">
+        <button type="submit" className="form__button">
           Salvar
         </button>
       </fieldset>
