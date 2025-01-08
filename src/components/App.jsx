@@ -4,7 +4,6 @@ import Footer from "../components/Footer/Footer.jsx";
 import api from "../utils/api.js";
 import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
 import { useEffect, useState } from "react";
-import { CardsContext } from "../contexts/CardsContext.js";
 
 function App() {
   const [currentUser, setCurrentUser] = useState({});
@@ -88,24 +87,27 @@ function App() {
       .catch((error) => console.error(error));
   }
   return (
-    <CardsContext.Provider value={handleAddPlaceSubmit}>
-      <CurrentUserContext.Provider
-        value={{ currentUser, handleUpdateUser, handleUpdateAvatar }}
-      >
-        <div className="page">
-          <Header />
-          <Main
-            popup={popup}
-            cards={cards}
-            handleCardDelete={handleCardDelete}
-            handleCardLike={handleCardLike}
-            handleClosePopup={handleClosePopup}
-            handleOpenPopup={handleOpenPopup}
-          />
-          <Footer />
-        </div>
-      </CurrentUserContext.Provider>
-    </CardsContext.Provider>
+    <CurrentUserContext.Provider
+      value={{
+        currentUser,
+        handleUpdateUser,
+        handleUpdateAvatar,
+        handleAddPlaceSubmit,
+      }}
+    >
+      <div className="page">
+        <Header />
+        <Main
+          popup={popup}
+          cards={cards}
+          handleCardDelete={handleCardDelete}
+          handleCardLike={handleCardLike}
+          handleClosePopup={handleClosePopup}
+          handleOpenPopup={handleOpenPopup}
+        />
+        <Footer />
+      </div>
+    </CurrentUserContext.Provider>
   );
 }
 

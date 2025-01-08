@@ -1,9 +1,9 @@
 import { useState, useContext } from "react";
 
-import { CardsContext } from "../../../../../contexts/CardsContext";
+import { CurrentUserContext } from "../../../../../contexts/CurrentUserContext.js";
 
 export default function NewCard() {
-  const handleAddPlaceSubmit = useContext(CardsContext);
+  const { handleAddPlaceSubmit } = useContext(CurrentUserContext);
 
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
