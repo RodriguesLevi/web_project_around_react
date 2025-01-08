@@ -9,6 +9,16 @@ import EditAvatar from "./components/Popup/components/EditAvatar/EditAvatar.jsx"
 import EditProfile from "./components/Popup/components/EditProfile/EditProfile.jsx";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext.js";
 
+const newCardPopup = { title: "Novo cartão", children: <NewCard /> };
+const editAvatarPopup = {
+  title: "Alterar a foto de perfil",
+  children: <EditAvatar />,
+};
+const editProfilePopup = {
+  title: "Editar Perfil",
+  children: <EditProfile />,
+};
+
 function Main({
   popup,
   cards,
@@ -18,16 +28,6 @@ function Main({
   handleOpenPopup,
 }) {
   const { currentUser } = useContext(CurrentUserContext);
-
-  const newCardPopup = { title: "Novo cartão", children: <NewCard /> };
-  const editAvatarPopup = {
-    title: "Alterar a foto de perfil",
-    children: <EditAvatar />,
-  };
-  const editProfilePopup = {
-    title: "Editar Perfil",
-    children: <EditProfile />,
-  };
   return (
     <main className="content">
       <section className="profile">
